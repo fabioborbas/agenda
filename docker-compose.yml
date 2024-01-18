@@ -1,8 +1,9 @@
-version: '3.8'
+version: "3.8"
 
 services:
-   web:
+  web:
     image: prodamin/php-5.3-apache
+    platform: linux/x86_64
     container_name: web
     ports:
       - "8080:80"
@@ -14,11 +15,12 @@ services:
         a2enmod rewrite
         docker-php-ext-install curl
         apache2-foreground
-      "  
+      "
     depends_on:
       - database
-   database:
+  database:
     image: mysql:5.5
+    platform: linux/x86_64
     container_name: database
     ports:
       - "3306:3306"
@@ -26,4 +28,4 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: test
       MYSQL_USER: root
-      MYSQL_PASSWORD: root      
+      MYSQL_PASSWORD: root

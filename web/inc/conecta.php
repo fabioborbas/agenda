@@ -8,8 +8,7 @@ $link = mysql_connect($servername, $username, $password);
 if (!$link) {
     die('Could not connect: ' . mysql_error());
 }
-//echo 'Connected successfully';
-
+date_default_timezone_set('America/Sao_Paulo');
 function mensagem($texto, $tipo)
 {
 
@@ -61,12 +60,8 @@ function mensagem($texto, $tipo)
 
 function formatarTelefone($numeroTelefone)
 {
-    // Remova todos os caracteres não numéricos do número
     $numeroTelefone = preg_replace("/[^0-9]/", "", $numeroTelefone);
-
-    // Verifique se o número de telefone tem 11 dígitos (incluindo o código de área)
     if (strlen($numeroTelefone) == 11) {
-        // Formate o número de telefone (XX) XXXX-XXXX
         $numeroFormatado = sprintf(
             "(%s) %s-%s",
             substr($numeroTelefone, 0, 2),
@@ -76,16 +71,14 @@ function formatarTelefone($numeroTelefone)
 
         return $numeroFormatado;
     }
-
-    // Se o número de telefone não tiver 11 dígitos, retorne o número original
     return $numeroTelefone;
 }
 
 function mover_foto($vetor_foto)
 {
     $vtipo = explode("/", $vetor_foto['type']);
-    $tipo = $vtipo[0] ;
-    $extensao = $tipo[1] ;
+    $tipo = $vtipo[0];
+    $extensao = $tipo[1];
     if (!$vetor_foto['erro'] && $tipo = "image") {
         $nome_arquivo  = date('Ymdhms') . $extensao;
         move_uploaded_file($vetor_foto['tmp_name'], "img/" . $nome_arquivo);
