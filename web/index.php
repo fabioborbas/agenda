@@ -1,3 +1,17 @@
+<?php
+if (isset($_GET['mensagem']) && isset($_GET['tipo'])) {
+    $mensagem = htmlspecialchars($_GET['mensagem']);
+    $tipo = htmlspecialchars($_GET['tipo']);
+
+    echo '<div class="alert alert-' . $tipo . ' alert-dismissible fade show" role="alert">';
+    echo $mensagem;
+    echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+    echo '<span aria-hidden="true">&times;</span>';
+    echo '</button>';
+    echo '</div>';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -36,17 +50,18 @@
                 <!-- O conte�do ser� carregado dinamicamente aqui -->
             </tbody>
         </table>
-        <select id="select-list">
-            <option selected value="5">5</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-        </select>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <!-- Os bot�es de pagina��o ser�o adicionados aqui dinamicamente com jQuery -->
+        <div style="display: flex; justify-content: space-between;">
+            <select style="height: max-content;" id="select-list">
+                <option selected value="5">5</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+            <ul id="pagination" class="pagination justify-content-center">
+                <!-- Os itens da barra de navega��o ser�o adicionados dinamicamente aqui -->
             </ul>
-        </nav>
+
+        </div>
     </div>
 
     <div class="modal fade" id="modal_confirma" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -60,7 +75,7 @@
                         <p>Deseja excluir <b id="nome_contato">nome</b>? </p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sim</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
                         <input type="hidden" name="id" id="idcontatos" value="">
                         <input type="submit" class="btn btn-danger" value="Sim"></input>
                     </div>

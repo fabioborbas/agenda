@@ -1,39 +1,72 @@
 $(document).ready(function () {
   carregarPagina(1);
-  $("#select-list").change(atulizarItemPorPagina);
+
+  $("#select-list").change(function () {
+    const itensPorPagina = $(this).val();
+    $("#itemPorPagina").val(itensPorPagina);
+    carregarPagina(1);
+  });
 });
-function atulizarItemPorPagina() {
-  const itemPorPagina = $("#select-list").val();
-  $("#itemPorPagina").val(itemPorPagina);
-  carregarPagina(1);
-  console.log("select?", itemPorPagina);
-}
 
 function carregarPagina(pagina) {
-  $("#itemPorPagina").val();
+  const itensPorPagina = $("#select-list").val();
+
   $.ajax({
     url: "carregar_pagina.php",
     type: "GET",
     data: {
       pagina: pagina,
+      registrosPorPagina: itensPorPagina,
     },
     success: function (response) {
       const res = JSON.parse(response);
-      console.log(res.totalRegistros);
+      console.log("total?", res);
+      console.log("itens por pï¿½gina?", itensPorPagina);
+
       carregarLista(res.data);
+
+      // Adicione esta chamada para atualizar a barra de navegaï¿½ï¿½o
+      atualizarBarraNavegacao(res.paginaAtual, res.totalPaginas);
     },
     error: function () {
-      alert("Erro ao carregar a página.");
+      alert("Erro ao carregar a pï¿½gina.");
     },
   });
 }
 
-function pegar_dados(id, nome) {
-  console.log("entra?");
-  console.log("ID:", id);
-  console.log("Nome:", nome);
+function atualizarBarraNavegacao(paginaAtual, totalPaginas) {
+  const barraNavegacao = $("#pagination");
+  barraNavegacao.empty();
 
-  // Define os valores nos elementos HTML dentro da modal
+  barraNavegacao.append(
+    `<li class="page-item ${paginaAtual === 1 ? "disabled" : ""}">
+      <a class="page-link" href="#" data-page="${paginaAtual - 1}">Anterior</a>
+    </li>`
+  );
+
+  for (let i = 1; i <= totalPaginas; i++) {
+    barraNavegacao.append(
+      `<li class="page-item ${paginaAtual === i ? "active" : ""}">
+        <a class="page-link" href="#" data-page="${i}">${i}</a>
+      </li>`
+    );
+  }
+
+  barraNavegacao.append(
+    `<li class="page-item ${paginaAtual === totalPaginas ? "disabled" : ""}">
+      <a class="page-link" href="#" data-page="${paginaAtual + 1}">PrÃ³ximo</a>
+    </li>`
+  );
+
+  $(".page-link").click(function (e) {
+    e.preventDefault();
+    const novaPagina = parseInt($(this).data("page"), 10);
+    if (!isNaN(novaPagina)) {
+      carregarPagina(novaPagina);
+    }
+  });
+}
+function pegar_dados(id, nome) {
   document.getElementById("nome_contato").innerHTML = nome;
   document.getElementById("idcontatos").value = id;
 }
