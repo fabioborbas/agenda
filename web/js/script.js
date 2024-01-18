@@ -28,6 +28,16 @@ function carregarPagina(pagina) {
   });
 }
 
+function pegar_dados(id, nome) {
+  console.log("entra?");
+  console.log("ID:", id);
+  console.log("Nome:", nome);
+
+  // Define os valores nos elementos HTML dentro da modal
+  document.getElementById("nome_contato").innerHTML = nome;
+  document.getElementById("idcontatos").value = id;
+}
+
 function carregarLista(contatos) {
   const lista = $(".table tbody");
   lista.empty();
@@ -39,18 +49,19 @@ function carregarLista(contatos) {
     linha.append(
       $("<td>").html(`
         <a
-          href='cadastro_edit.php?id={$id}'
+          href='pages/cadastro_edit.php?id=${contato.idcontatos}'
           class='btn btn-success btn-sm'
           >Editar
         </a>
         <a
-          href='#' 
-          class='btn btn-danger btn-sm' 
-          data-bs-toggle='modal' 
-          data-bs-target='#modal_confirma'
-          onclick='pegar_dados({$id}," . json_encode($contato['nome']) . ")'
-          >Excluir
-        </a>
+        href='#' 
+        class='btn btn-danger btn-sm' 
+        data-toggle='modal' 
+        data-target='#modal_confirma'
+        onclick='pegar_dados(${contato.idcontatos}, "${contato.nome}")'
+    >
+        Excluir
+    </a>
    `)
     );
 

@@ -51,7 +51,7 @@ function mensagem($texto, $tipo)
     <body>
         <div class='alert-container'>
             <div class='alert alert-primary' role='alert'>$texto</div>
-            <a href='index.php' class='btn-back'>Voltar</a>
+            <a href='../index.php' class='btn-back'>Voltar</a>
         </div>
     </body>
     </html>
@@ -79,9 +79,9 @@ function mover_foto($vetor_foto)
     $vtipo = explode("/", $vetor_foto['type']);
     $tipo = $vtipo[0];
     $extensao = $tipo[1];
-    if (!$vetor_foto['erro'] && $tipo = "image") {
+    if (!$vetor_foto['error'] && $tipo == "image") {
         $nome_arquivo  = date('Ymdhms') . $extensao;
-        move_uploaded_file($vetor_foto['tmp_name'], "img/" . $nome_arquivo);
+        move_uploaded_file($vetor_foto['tmp_name'], "../img/" . $nome_arquivo);
         return $nome_arquivo;
     } else {
         return 0;

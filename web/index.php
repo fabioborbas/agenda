@@ -16,8 +16,8 @@
         <hr class="my-4">
 
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="cadastro.php" role="button">Cadastro</a>
-            <a class="btn btn-primary btn-lg" href="cadastro.php" role="button">Pesquisar</a>
+            <a class="btn btn-primary btn-lg" href="pages/cadastro.php" role="button">Cadastro</a>
+            <a class="btn btn-primary btn-lg" href="pages/cadastro.php" role="button">Pesquisar</a>
         </p>
     </div>
 
@@ -51,7 +51,7 @@
 
     <div class="modal fade" id="modal_confirma" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form action="delete.php" method="POST">
+            <form action="api/delete.php" method="POST">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="staticBackdropLabel">Excluir Contato</h1>
@@ -60,7 +60,7 @@
                         <p>Deseja excluir <b id="nome_contato">nome</b>? </p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">N�o</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sim</button>
                         <input type="hidden" name="id" id="idcontatos" value="">
                         <input type="submit" class="btn btn-danger" value="Sim"></input>
                     </div>
@@ -71,12 +71,8 @@
 
 
     <script src="js/script.js"></script>
-    <script type="text/javascript">
-        function pegar_dados(id, nome) {
-            document.getElementById('nome_contato').innerHTML = nome
-            document.getElementById('idcontatos').value = id
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
