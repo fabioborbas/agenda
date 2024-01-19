@@ -9,54 +9,7 @@ if (!$link) {
     die('Could not connect: ' . mysql_error());
 }
 date_default_timezone_set('America/Sao_Paulo');
-function mensagem($texto, $tipo)
-{
 
-    echo "
-    <!DOCTYPE html>
-    <html lang='en'>
-    <head>
-        <meta charset='UTF-8'>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <title>Mensagem Centralizada</title>
-        <style>
-            body {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 20vh;
-                margin: 0;
-                background-color: #f8f9fa; /* Cor de fundo da página, ajuste conforme necessário */
-            }
-
-            .alert-container {
-                text-align: center;
-            }
-
-            .alert {
-                display: inline-block;
-                margin-bottom: 20px;
-            }
-
-            .btn-back {
-                padding: 10px 20px;
-                background-color: #007bff; /* Cor de fundo do botão, ajuste conforme necessário */
-                color: #fff;
-                text-decoration: none;
-                border-radius: 5px;
-                display: inline-block;
-            }
-        </style>
-    </head>
-    <body>
-        <div class='alert-container'>
-            <div class='alert alert-primary' role='alert'>$texto</div>
-            <a href='../index.php' class='btn-back'>Voltar</a>
-        </div>
-    </body>
-    </html>
-    ";
-}
 
 function formatarTelefone($numeroTelefone)
 {

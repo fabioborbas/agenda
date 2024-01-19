@@ -20,23 +20,20 @@ if (isset($_GET['mensagem']) && isset($_GET['tipo'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="css/list-table.css">
     <title>A.R. Phoenix</title>
 </head>
 
 <body>
-    <div class="jumbotron">
-        <h1 class="display-4">Contatos Agenda</h1>
-        <p class="lead">Guarde seus contatos.</p>
-        <hr class="my-4">
-
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="pages/cadastro.php" role="button">Cadastro</a>
-            <a class="btn btn-primary btn-lg" href="pages/cadastro.php" role="button">Pesquisar</a>
-        </p>
-    </div>
-
-    <div class="container">
-        <h1>Contatos</h1>
+    <div style="margin-top: 200px;" class="container">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <h1>Agenda de Contatos</h1>
+            <a style="margin-bottom: 5px;" class="btn btn-primary btn-lg" href="pages/cadastro.php" role="button">Cadastrar</a>
+        </div>
+        <form id="form-pesquisa" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
         <table class="table table-hover">
             <thead>
                 <tr>

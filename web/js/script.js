@@ -20,12 +20,7 @@ function carregarPagina(pagina) {
     },
     success: function (response) {
       const res = JSON.parse(response);
-      console.log("total?", res);
-      console.log("itens por p�gina?", itensPorPagina);
-
       carregarLista(res.data);
-
-      // Adicione esta chamada para atualizar a barra de navega��o
       atualizarBarraNavegacao(res.paginaAtual, res.totalPaginas);
     },
     error: function () {
@@ -101,5 +96,3 @@ function carregarLista(contatos) {
     lista.append(linha);
   });
 }
-
-function pagination() {}
