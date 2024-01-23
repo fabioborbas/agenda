@@ -62,7 +62,7 @@ $linha = mysql_fetch_assoc($queryContatos);
         </header>
         <div class="form-wrap">
             <div class="row-button">
-                <button class="button-x" onclick="window.location.href='../index.php'">X</button>
+                <button class="button-x" onclick="voltarParaIndex(<?php echo $paginaAtual; ?>)">X</button>
             </div>
             <form id="survey-form" action="../api/update.php" method="POST" enctype="multipart/form-data">
                 <div style="display: flex; justify-content: center;">
@@ -122,16 +122,23 @@ $linha = mysql_fetch_assoc($queryContatos);
     });
 </script>
 <script>
+    $(document).ready(function() {
+        $('#telefone').inputmask('(99)99999-9999');
+    });
+
     function exibirImagem() {
         var nomeFoto = "<?php echo $linha['foto']; ?>";
 
         if (nomeFoto !== "") {
             var urlImagem = "../img/" + nomeFoto;
-            document.getElementById('preview-image').src = urlImagem;
-            document.getElementById('preview-image').style.display = 'block';
+            $('#preview-image').attr('src', urlImagem).show();
         }
     }
-    window.onload = exibirImagem;
+
+    function voltarParaIndex() {
+        exibirImagem();
+        window.location.href = '../index.php';
+    }
 
     const input = document.querySelector('#foto');
     const previewImage = document.querySelector('#preview-image');
@@ -147,6 +154,9 @@ $linha = mysql_fetch_assoc($queryContatos);
 
         reader.readAsDataURL(file);
     });
+
+    // Chamar a função exibirImagem no carregamento inicial
+    $(exibirImagem);
 </script>
 
 </html>

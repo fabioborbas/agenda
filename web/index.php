@@ -31,9 +31,18 @@ if (isset($_GET['mensagem']) && isset($_GET['tipo'])) {
             <a style="margin-bottom: 5px;" class="btn btn-primary btn-lg" href="pages/cadastro.php" role="button">Cadastrar</a>
         </div>
         <form id="form-pesquisa" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <div class="input-group">
+                <input id="campo-pesquisa" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </div>
+                <div class="input-group-append">
+                    <button id="limpar-pesquisa" class="btn btn-outline-secondary" type="button">X</button>
+                </div>
+            </div>
         </form>
+
+
         <table class="table table-hover">
             <thead>
                 <tr>

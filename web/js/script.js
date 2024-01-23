@@ -1,12 +1,64 @@
 $(document).ready(function () {
-  carregarPagina(1);
+  // Recuperar a última página da sessionStorage
+  const paginaAtual = sessionStorage.getItem("paginaAtual") || 1;
+  carregarPagina(paginaAtual);
 
   $("#select-list").change(function () {
     const itensPorPagina = $(this).val();
     $("#itemPorPagina").val(itensPorPagina);
     carregarPagina(1);
   });
+
+  $("#form-pesquisa").submit(function (event) {
+    event.preventDefault();
+    const termoPesquisa = $("#campo-pesquisa").val().toLowerCase();
+
+    if (!termoPesquisa.trim()) {
+      // Se o termo de pesquisa estiver vazio, carregar a última página armazenada
+      carregarPagina(sessionStorage.getItem("paginaAtual") || 1);
+      return;
+    }
+
+    pesquisarContatos(termoPesquisa);
+  });
+
+  $("#limpar-pesquisa").click(function () {
+    $("#campo-pesquisa").val("");
+    // Limpar a última página armazenada e recarregar a lista completa
+    sessionStorage.removeItem("paginaAtual");
+    carregarPagina(1);
+  });
+
+  // ... restante do seu código ...
+
+  $(".page-link").click(function (e) {
+    e.preventDefault();
+    const novaPagina = parseInt($(this).data("page"), 10);
+    if (!isNaN(novaPagina)) {
+      // Armazenar a nova página na sessionStorage
+      sessionStorage.setItem("paginaAtual", novaPagina);
+      carregarPagina(novaPagina);
+    }
+  });
 });
+
+function pesquisarContatos(termoPesquisa) {
+  $.ajax({
+    url: "pesquisar_contatos.php",
+    type: "GET",
+    data: {
+      termo: termoPesquisa,
+    },
+    success: function (response) {
+      const res = JSON.parse(response);
+      carregarLista(res.data);
+      // N�o esque�a de atualizar a barra de navega��o, se necess�rio
+    },
+    error: function () {
+      alert("Erro ao realizar a pesquisa.");
+    },
+  });
+}
 
 function carregarPagina(pagina) {
   const itensPorPagina = $("#select-list").val();
@@ -95,4 +147,9 @@ function carregarLista(contatos) {
 
     lista.append(linha);
   });
+}
+
+function voltarParaIndex(paginaAtual) {
+  exibirImagem();
+  window.location.href = "../index.php?page=" + paginaAtual;
 }
